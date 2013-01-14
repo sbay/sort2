@@ -30,9 +30,7 @@ function printFunction()
 				 $.get("http://" + window.location.hostname + "/PDFLetter.php?action=letters",{ 'records': curText , 'directory': dirSave },function(data,status){
 					    alert("File: " + data + "\n" + "has been downloaded with Status: " + status);
 					  });
-			}
- 
-			
+			}	
 }
 </script>
 </head>
