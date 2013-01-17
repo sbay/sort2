@@ -11,31 +11,49 @@
 <meta robots="noindex,nofollow" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
 </script>
+
 <script type="text/javascript">
 function printFunction()
 {
-		  var boxes 		= $('[id^=checkbox_print]:checked');
-		  var dirSave		= 'C:\\Users\\Andrei\\Downloads'; // temporary solution chenge to browse dialog
-		  
-		  	for( j=0; j< boxes.length ; j++)			 
-			{
+		  var boxes 		= $('[id^=checkbox_print]:checked');	
+		  var links			= [];
+		  var cleanDir		= true;
+		 
+		  for( j=0; j< boxes.length ; j++)			 
+		  {
+			  	 var link 			= 	"";
+			  	
 				 var celChildren 	= 	$(boxes[j]).parent().parent("tr").find("td");
 				 var curText		=	[];
 
 				 for( i=0; i< celChildren.length ; i++)
 				 {
-					 curText[i] = $(celChildren[i]).text();
+					 curText[i] 	= 	$(celChildren[i]).text();
 				 }
 
-				 $.get("http://" + window.location.hostname + "/PDFLetter.php?action=letters",{ 'records': curText , 'directory': dirSave },function(data,status){
-					    alert("File: " + data + "\n" + "has been downloaded with Status: " + status);
-					  });
-			}	
+				 jQuery.ajaxSetup({async:false});
+				 var jqxhr = $.get("http://" + window.location.hostname + "/PDFLetter.php?action=letters",{ 'records': curText},function(data,status)
+						 {
+							link 	= "<a  href=\"" + data + "\"   > <img id=\"myimg\" src=\"pdf.png\"></a>"
+							links[j]= link;
+					    	alert("File: " + link + "\n" + "has been downloaded with Status: " + status);
+					  	});	
+				 jQuery.ajaxSetup({async:true});
+						 
+				 $(celChildren[celChildren.length-1]).html(links[j]);
+				 cleanDir	=	false;
+			}
+
+		  
 }
 </script>
 </head>
 <body>
 
+	<div id="example-list-fs" class="example">
+      <ul id="example-list-fs-ul"></ul>
+    </div>
+    
 <?php
 
 require_once 'SortArest.php';
@@ -225,7 +243,7 @@ if ($_POST['content'])
 	
 	echo "</div>";
 	
-	echo "<button id=\"print_letters\" onclick=\"printFunction()\">Print Letters</button>";
+	echo "<div id=\"print_div\"><button id=\"print_letters\" onclick=\"printFunction()\">Print Letters</button></div>";
 } else {
 	echo "<h3>Please fill out all required fields.</h3>\n\n\n";
 }
