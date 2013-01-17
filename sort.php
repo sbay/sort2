@@ -13,11 +13,20 @@
 </script>
 
 <script type="text/javascript">
+function cleanDirectory()
+{
+	$.get("http://" + window.location.hostname + "/PDFLetter.php?action=letters",{ 'directory': true},function(data,status)
+			 {
+		    	alert("Clean completed with status:" + status);
+		  	});	
+
+}
+
 function printFunction()
 {
 		  var boxes 		= $('[id^=checkbox_print]:checked');	
 		  var links			= [];
-		  var cleanDir		= true;
+		  
 		 
 		  for( j=0; j< boxes.length ; j++)			 
 		  {
@@ -42,12 +51,11 @@ function printFunction()
 						 {
 							link 	= "<a  href=\"" + data + "\"  target=\"_blank\"> <img id=\"myimg\" src=\"pdf.png\" height=\"" + imgDim + "\" width=\"" + imgDim + "\"></a>"
 							links[j]= link;
-					    	alert("File: " + link + "\n" + "has been downloaded with Status: " + status);
+					    	alert("File: " + data + "\n" + "has been downloaded with Status: " + status);
 					  	});	
-				 jQuery.ajaxSetup({async:true});
-						 
+				 //$(boxes[j]).hide();	 
 				 $(celChildren[celChildren.length-1]).html(links[j]);
-				 cleanDir	=	false;
+				 jQuery.ajaxSetup({async:true});
 			}
 
 		  

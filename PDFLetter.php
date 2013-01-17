@@ -15,6 +15,7 @@ if( $_REQUEST['action'] == 'letters' )
 	{
 		$mask 	= $dirBrows . DIRECTORY_SEPARATOR . "*.*";
 		array_map( "unlink", glob( $mask ) );
+		return;
 	}
 	
 	$records 	= null;
