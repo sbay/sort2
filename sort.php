@@ -25,6 +25,12 @@ function printFunction()
 			  	
 				 var celChildren 	= 	$(boxes[j]).parent().parent("tr").find("td");
 				 var curText		=	[];
+				 var imgDim			= 	null;
+
+				 if(celChildren.length)
+				 {
+					 imgDim			=	$(celChildren[0]).innerHeight();
+				 }
 
 				 for( i=0; i< celChildren.length ; i++)
 				 {
@@ -34,7 +40,7 @@ function printFunction()
 				 jQuery.ajaxSetup({async:false});
 				 var jqxhr = $.get("http://" + window.location.hostname + "/PDFLetter.php?action=letters",{ 'records': curText},function(data,status)
 						 {
-							link 	= "<a  href=\"" + data + "\"   > <img id=\"myimg\" src=\"pdf.png\"></a>"
+							link 	= "<a  href=\"" + data + "\"  target=\"_blank\"> <img id=\"myimg\" src=\"pdf.png\" height=\"" + imgDim + "\" width=\"" + imgDim + "\"></a>"
 							links[j]= link;
 					    	alert("File: " + link + "\n" + "has been downloaded with Status: " + status);
 					  	});	
