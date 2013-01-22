@@ -24,8 +24,9 @@ function cleanDirectory()
 
 function printFunction()
 {
-		  var boxes 		= $('[id^=checkbox_print]:checked');	
-		  var links			= [];
+		  var boxes 				= $('[id^=checkbox_print]:checked');	
+		  var recordsToPrint		= [];
+		  var links					= [];
 		  
 		 
 		  for( j=0; j< boxes.length ; j++)			 
@@ -45,20 +46,19 @@ function printFunction()
 				 {
 					 curText[i] 	= 	$(celChildren[i]).text();
 				 }
-
-				 jQuery.ajaxSetup({async:false});
-				 var jqxhr = $.get("http://" + window.location.hostname + "/PDFLetter.php?action=letters",{ 'records': curText},function(data,status)
-						 {
-							link 	= "<a  href=\"" + data + "\"  target=\"_blank\"> <img id=\"myimg\" src=\"pdf.png\" height=\"" + imgDim + "\" width=\"" + imgDim + "\"></a>"
-							links[j]= link;
-					    	alert("File: " + data + "\n" + "has been downloaded with Status: " + status);
-					  	});	
-				 //$(boxes[j]).hide();	 
-				 $(celChildren[celChildren.length-1]).html(links[j]);
-				 jQuery.ajaxSetup({async:true});
+				 recordsToPrint[j]	=	curText;
+				 
 			}
 
-		  
+		   jQuery.ajaxSetup({async:false});
+		   var jqxhr = $.get("http://" + window.location.hostname + "/PDFLetter.php?action=letters",{ 'records': recordsToPrint},function(data,status)
+					 {
+						link 	= "<a  href=\"" + data + "\"  target=\"_blank\"> <img id=\"myimg\" src=\"pdf.png\" height=\"" + imgDim + "\" width=\"" + imgDim + "\"></a>"
+				    	alert("File: " + data + "\n" + "has been downloaded with Status: " + status);
+				  	});	
+		   $("#pdfout").html(link);
+		   jQuery.ajaxSetup({async:true});
+		    
 }
 </script>
 </head>
@@ -257,7 +257,7 @@ if ($_POST['content'])
 	
 	echo "</div>";
 	
-	echo "<div id=\"print_div\"><button id=\"print_letters\" onclick=\"printFunction()\">Print Letters</button></div>";
+	echo "<div id=\"print_div\"><button id=\"print_letters\" onclick=\"printFunction()\">Print Letters</button><span id=\"pdfout\"></span></div>";
 } else {
 	echo "<h3>Please fill out all required fields.</h3>\n\n\n";
 }
