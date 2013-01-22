@@ -42,7 +42,9 @@ if( $_REQUEST['action'] == 'letters' )
 		$fullAdress		= $printRecords[$i][3] . "\n" . $printRecords[$i][4] . "\n" . $printRecords[$i][5] . "\n" .  $printRecords[$i][6] . "\n";
 		$pdf->Write(5, $fullName . $fullAdress );
 		
+		
 		// letter
+		$pdf->SetFont('');
 		$pdf->AddPage();
 		$letter			= "Dear," . $fullName . ", our records indicate...";
 		$pdf->Write(5, $letter );
