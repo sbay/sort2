@@ -203,7 +203,8 @@ if ($_POST['content'])
 		echo "<th><b>Gender</b></th>";
 		echo "<th><b>Race</b></th>";
 		echo "<th><b>Arrest agency</b></th>";
-		echo "<th><b>Arrest date</b></th></tr>";
+		echo "<th><b>Arrest date</b></th>";
+		echo "<th><input type=\"checkbox\" name=\"select_all\" id=\"select_all_fl\" onclick=\"checkFunction(this)\" /></th></tr>";
 		echo "</thead>";
 	
 	
@@ -220,7 +221,8 @@ if ($_POST['content'])
 			echo "<td>" . $record_plus[$i]['gender'] . "</td>";
 			echo "<td>" . $record_plus[$i]['race'] . "</td>";
 			echo "<td>" . $record_plus[$i]['arrest_agency'] . "</td>";
-			echo "<td>" . $record_plus[$i]['arrest_date']. "</td></tr>";
+			echo "<td>" . $record_plus[$i]['arrest_date']. "</td>";
+			echo "<td><input type=\"checkbox\" name=\"print_letter\" id=\"checkbox_print_fl" . $i . "\"/></td></tr>";
 	}
 	echo "</table>";
 	echo "</pre><hr />\n\n\n";
