@@ -152,7 +152,7 @@ if ($_POST['content'])
 		$record_plus 		= $a->getFullMatchedRecords();
 		$record_plus_length = sizeof($record_plus);
 	
-		echo "<table border=\"1\">";
+		echo "<table id=\"table_two\" border=\"1\">";
 		echo "<thead>";
 		echo "<tr><th><b>First name</b></th>";
 		echo "<th><b>Middle name</b></th>";
@@ -161,7 +161,8 @@ if ($_POST['content'])
 		echo "<th><b>City</b></th>";
 		echo "<th><b>State</b></th>";
 		echo "<th><b>Zip</b></th>";
-		echo "<th><b>Charges</b></th></tr>";
+		echo "<th><b>Charges</b></th>";
+		echo "<th><input type=\"checkbox\" name=\"select_all\" id=\"select_all_shrt\" onclick=\"checkFunction(this)\" /></th></tr>";
 		echo "</thead>";
 	
 	
@@ -174,7 +175,8 @@ if ($_POST['content'])
 					echo "<td>" . $record_plus[$i]['city'] . "</td>";
 					echo "<td>" . $record_plus[$i]['state'] . "</td>";
 					echo "<td>" . $record_plus[$i]['zip'] . "</td>";
-					echo "<td>" . $record_plus[$i]['charges'] . "</td></tr>";
+					echo "<td>" . $record_plus[$i]['charges'] . "</td>";
+					echo "<td><input type=\"checkbox\" name=\"print_letter\" id=\"checkbox_print_srt" . $i . "\"/></td></tr>";
 		}
 		echo "</table>";
 	
@@ -188,7 +190,7 @@ if ($_POST['content'])
 		$record_plus 		= $a->getFullMatchedRecords();
 		$record_plus_length = sizeof($record_plus);
 	
-		echo "<table border=\"1\">";
+		echo "<table id=\"table_three\" border=\"1\">";
 		echo "<thead>";
 		echo "<tr><th><b>First name</b></th>";
 		echo "<th><b>Middle name</b></th>";
