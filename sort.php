@@ -13,6 +13,19 @@
 </script>
 
 <script type="text/javascript">
+
+function checkFunction(element)
+{
+	var tblID			=	$(element).parent().parent().parent().parent().attr('id');
+	var checkedStatus 	= 	$(element).attr('checked');
+	
+	$("#" + tblID + " tr td:last-child input:checkbox").each(function() 
+	{
+		this.checked 	= 	checkedStatus;
+	});
+
+}
+
 function cleanDirectory()
 {
 	$.get("http://" + window.location.hostname + "/PDFLetter.php?action=letters",{ 'directory': true},function(data,status)
@@ -98,7 +111,7 @@ if ($_POST['content'])
 		$record_plus 		= $a->getFullMatchedRecords();
 		$record_plus_length = sizeof($record_plus);
 		
-		echo "<table border=\"1\">";
+		echo "<table id=\"table_one\" border=\"1\">";
 		echo "<thead>";
 		echo "<tr><th><b>First name</b></th>";
 		echo "<th><b>Middle name</b></th>";
@@ -107,7 +120,8 @@ if ($_POST['content'])
 		echo "<th><b>City</b></th>";
 		echo "<th><b>State</b></th>";
 		echo "<th><b>Zip</b></th>";
-		echo "<th><b>Charges</b></th></tr>";
+		echo "<th><b>Charges</b></th>";
+		echo "<th><input type=\"checkbox\" name=\"select_all\" id=\"select_all_match_shrt\" onclick=\"checkFunction(this)\" /></th></tr>";
 		echo "</thead>";
 		
 		
@@ -179,13 +193,13 @@ if ($_POST['content'])
 		echo "<tr><th><b>First name</b></th>";
 		echo "<th><b>Middle name</b></th>";
 		echo "<th><b>Last name</b></th>";
-		echo "<th><b>Gender</b></th>";
-		echo "<th><b>Race</b></th>";
 		echo "<th><b>Street adress</b></th>";
 		echo "<th><b>City</b></th>";
 		echo "<th><b>State</b></th>";
-		echo "<th><b>Zip</b></th>";
+		echo "<th><b>Zip</b></th>";	
 		echo "<th><b>Charges</b></th>";
+		echo "<th><b>Gender</b></th>";
+		echo "<th><b>Race</b></th>";
 		echo "<th><b>Arrest agency</b></th>";
 		echo "<th><b>Arrest date</b></th></tr>";
 		echo "</thead>";
@@ -195,14 +209,14 @@ if ($_POST['content'])
 		{
 			echo "<tr><td>" . $record_plus[$i]['first_name'] . "</td>";
 			echo "<td>" . $record_plus[$i]['middle_name'] . "</td>";
-			echo "<td>" . $record_plus[$i]['last_name'] . "</td>";
-			echo "<td>" . $record_plus[$i]['gender'] . "</td>";
-			echo "<td>" . $record_plus[$i]['race'] . "</td>";
+			echo "<td>" . $record_plus[$i]['last_name'] . "</td>";		
 			echo "<td>" . $record_plus[$i]['street_address'] . "</td>";
 			echo "<td>" . $record_plus[$i]['city'] . "</td>";
 			echo "<td>" . $record_plus[$i]['state'] . "</td>";
 			echo "<td>" . $record_plus[$i]['zip'] . "</td>";
 			echo "<td>" . $record_plus[$i]['charges'] . "</td>";
+			echo "<td>" . $record_plus[$i]['gender'] . "</td>";
+			echo "<td>" . $record_plus[$i]['race'] . "</td>";
 			echo "<td>" . $record_plus[$i]['arrest_agency'] . "</td>";
 			echo "<td>" . $record_plus[$i]['arrest_date']. "</td></tr>";
 	}
@@ -221,14 +235,14 @@ if ($_POST['content'])
 		echo "<thead>";
 		echo "<tr><th><b>First name</b></th>";
 		echo "<th><b>Middle name</b></th>";
-		echo "<th><b>Last name</b></th>";
-		echo "<th><b>Gender</b></th>";
-		echo "<th><b>Race</b></th>";
+		echo "<th><b>Last name</b></th>";	
 		echo "<th><b>Street adress</b></th>";
 		echo "<th><b>City</b></th>";
 		echo "<th><b>State</b></th>";
 		echo "<th><b>Zip</b></th>";
 		echo "<th><b>Charges</b></th>";
+		echo "<th><b>Gender</b></th>";
+		echo "<th><b>Race</b></th>";
 		echo "<th><b>Arrest agency</b></th>";
 		echo "<th><b>Arrest date</b></th></tr>";
 		echo "</thead>";
@@ -240,14 +254,14 @@ if ($_POST['content'])
 				continue;
 			echo "<tr><td>" . $record_plus[$i]['first_name'] . "</td>";
 			echo "<td>" . $record_plus[$i]['middle_name'] . "</td>";
-			echo "<td>" . $record_plus[$i]['last_name'] . "</td>";
-			echo "<td>" . $record_plus[$i]['gender'] . "</td>";
-			echo "<td>" . $record_plus[$i]['race'] . "</td>";
+			echo "<td>" . $record_plus[$i]['last_name'] . "</td>";	
 			echo "<td>" . $record_plus[$i]['street_address'] . "</td>";
 			echo "<td>" . $record_plus[$i]['city'] . "</td>";
 			echo "<td>" . $record_plus[$i]['state'] . "</td>";
 			echo "<td>" . $record_plus[$i]['zip'] . "</td>";
 			echo "<td>" . $record_plus[$i]['charges'] . "</td>";
+			echo "<td>" . $record_plus[$i]['gender'] . "</td>";
+			echo "<td>" . $record_plus[$i]['race'] . "</td>";
 			echo "<td>" . $record_plus[$i]['arrest_agency'] . "</td>";
 			echo "<td>" . $record_plus[$i]['arrest_date']. "</td></tr>";
 		}
@@ -305,10 +319,10 @@ label { cursor: pointer; }
 <input type="radio" name="crime_list" id="crime3" value="all" <?php echo ($_POST['crime_list'] == "all" ? 'checked' : ''); ?>/> <label for="crime3">Include All</label></div>
 
 <div><b>Output Options:</b><br>
-<input type="checkbox" name="results_only" id="option1" <?php echo (isset($_POST['results_only']) ? 'checked' : ''); ?>/> <label for="option1">Show matched records</label><br>
+<input type="checkbox" name="results_only" id="option1" <?php echo (isset($_POST['results_only']) ? 'checked' : ''); ?>/> <label for="option1">Show matched records(Short version)</label><br>
+<input type="checkbox" name="matched_full" id="option4" <?php echo (isset($_POST['matched_full']) ? 'checked' : ''); ?>/> <label for="option4">Show matched records (Full version)</label><br>
 <input type="checkbox" name="all_short" id="option2" <?php echo (isset($_POST['all_short']) ? 'checked' : ''); ?>/> <label for="option2">Show all records (Short version)</label><br>
-<input type="checkbox" name="all_full" id="option3" <?php echo (isset($_POST['all_full']) ? 'checked' : ''); ?>/> <label for="option3">Show all records (Full version)</label><br>
-<input type="checkbox" name="matched_full" id="option4" <?php echo (isset($_POST['matched_full']) ? 'checked' : ''); ?>/> <label for="option4">Show all matched records (Full version)</label></div>
+<input type="checkbox" name="all_full" id="option3" <?php echo (isset($_POST['all_full']) ? 'checked' : ''); ?>/> <label for="option3">Show all records (Full version)</label></div>
 <hr />
 <input type="submit" value="Sort" />
 </form>
