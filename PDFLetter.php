@@ -13,12 +13,6 @@ if( $_REQUEST['action'] == 'letters' )
 	}
 
 	$printRecords	= 	$_REQUEST['records'];
-	$recordPart		=	"letter";
-	
-	if( $_REQUEST['part'] == "envelop" )
-	{
-		$recordPart = "envelop";
-	}
 	
 	
 	if(!file_exists($dirBrows))
@@ -28,7 +22,7 @@ if( $_REQUEST['action'] == 'letters' )
 	else
 	{
 		// remove previous file
-		$mask 	= $dirBrows . DIRECTORY_SEPARATOR . $recordPart . ".pdf";
+		$mask 	= $dirBrows . DIRECTORY_SEPARATOR . "letter.pdf";
 		array_map( "unlink", glob( $mask ) );
 	}
 	
@@ -38,7 +32,7 @@ if( $_REQUEST['action'] == 'letters' )
 	
 	$pdf = new FPDF();
 	
-	$fileName 	= $dirBrows . DIRECTORY_SEPARATOR .  $recordPart . ".pdf";
+	$fileName 	= $dirBrows . DIRECTORY_SEPARATOR .  "letter.pdf";
 	
 	
 	$maxRecords	=	sizeof($printRecords);
@@ -48,20 +42,17 @@ if( $_REQUEST['action'] == 'letters' )
 		
 		$pdf->AddPage();
 
-		if($recordPart == "envelop")
-		{
+		
 			// envelop
-			$fullName 		= $printRecords[$i][0] . " " . $printRecords[$i][1] . " " . $printRecords[$i][2] . "\n";
-			$fullAdress		= $printRecords[$i][3] . "\n" . $printRecords[$i][4] . "\n" . $printRecords[$i][5] . "\n" .  $printRecords[$i][6] . "\n";
-			$pdf->Write(5, $fullName . $fullAdress );
-		}
-		else 
-		{
+		$fullName 		= $printRecords[$i][0] . " " . $printRecords[$i][1] . " " . $printRecords[$i][2] . "\n";
+		$fullAdress		= $printRecords[$i][3] . "\n" . $printRecords[$i][4] . "\n" . $printRecords[$i][5] . "\n" .  $printRecords[$i][6] . "\n";
+			//$pdf->Write(5, $fullName . $fullAdress );
+	
 			// letter
-			$pdf->SetFont('');
-			$letter			= "Dear," . $fullName . ", our records indicate...";
-			$pdf->Write(5, $letter );
-		}
+		//$pdf->SetFont('');
+		$letter			= "Dear," . $fullName . ", our records indicate...";
+		$pdf->Write(5, $letter );
+	
 		
 	}
 	$linkFileName	= "http:" . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . $hostName . DIRECTORY_SEPARATOR . $fileName;

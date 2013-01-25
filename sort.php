@@ -40,39 +40,28 @@ function printFunction(element)
 		  var boxes 				= $('[id^=checkbox_print]:checked');	
 		  var recordsToPrint		= [];
 		  var links					= [];
-		  var letterPart			= "envelop";
-
-		  if(element.id == "print_letters" )
-			  letterPart	=	"letter";
-		
+		 
 		  for( j=0; j< boxes.length ; j++)			 
 		  {
 			  	 var link 			= 	"";
 			  	
 				 var celChildren 	= 	$(boxes[j]).parent().parent("tr").find("td");
 				 var curText		=	[];
-				 var imgDim			= 	null;
 
-				 if(celChildren.length)
+				 for( i=1; i< celChildren.length ; i++)
 				 {
-					 imgDim			=	$(celChildren[0]).innerHeight();
-				 }
-
-				 for( i=0; i< celChildren.length ; i++)
-				 {
-					 curText[i] 	= 	$(celChildren[i]).text();
+					 curText[i-1] 	= 	$(celChildren[i]).text();
 				 }
 				 recordsToPrint[j]	=	curText;
 				 
 			}
 
 		   jQuery.ajaxSetup({async:false});
-		   var jqxhr = $.get( "PDFLetter.php?action=letters",{ 'records': recordsToPrint, 'part': letterPart},function(data,status)
+		   var jqxhr = $.get( "PDFLetter.php?action=letters",{ 'records': recordsToPrint},function(data,status)
 					 {
-						window.open( data , "_blank");
-				    	alert("File: " + data + "\n" + "has been downloaded with Status: " + status);
+			   			alert("File: " + data + "\n" + "has been downloaded with Status: " + status);
+						window.open( data , "_blank");	
 				  	});	
-		   $("#pdfout").html(link);
 		   jQuery.ajaxSetup({async:true});
 		    
 }
@@ -116,7 +105,8 @@ if ($_POST['content'])
 		
 		echo "<table id=\"table_one\" border=\"1\">";
 		echo "<thead>";
-		echo "<tr><th><b>First name</b></th>";
+		echo "<tr><th></th>";
+		echo "<th><b>First name</b></th>";
 		echo "<th><b>Middle name</b></th>";
 		echo "<th><b>Last name</b></th>";
 		echo "<th><b>Street adress</b></th>";
@@ -132,7 +122,8 @@ if ($_POST['content'])
 		{
 		if( !$a->isMatched( $record_plus[$i] ) )
 			continue;
-			echo "<tr><td>" . $record_plus[$i]['first_name'] . "</td>";
+			echo "<tr><td>" . ($i+1) . "</td>";
+			echo "<td>" . $record_plus[$i]['first_name'] . "</td>";
 			echo "<td>" . $record_plus[$i]['middle_name'] . "</td>";
 			echo "<td>" . $record_plus[$i]['last_name'] . "</td>";
 			echo "<td>" . $record_plus[$i]['street_address'] . "</td>";
