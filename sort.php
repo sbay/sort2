@@ -28,20 +28,23 @@ function checkFunction(element)
 
 function cleanDirectory()
 {
-	$.get("http://" + window.location.hostname + "/PDFLetter.php?action=letters",{ 'directory': true},function(data,status)
+	$.get("PDFLetter.php?action=letters",{ 'directory': true},function(data,status)
 			 {
 		    	alert("Clean completed with status:" + status);
 		  	});	
 
 }
 
-function printFunction()
+function printFunction(element)
 {
 		  var boxes 				= $('[id^=checkbox_print]:checked');	
 		  var recordsToPrint		= [];
 		  var links					= [];
-		  
-		 
+		  var letterPart			= "envelop";
+
+		  if(element.id == "print_letters" )
+			  letterPart	=	"letter";
+		
 		  for( j=0; j< boxes.length ; j++)			 
 		  {
 			  	 var link 			= 	"";
@@ -64,9 +67,9 @@ function printFunction()
 			}
 
 		   jQuery.ajaxSetup({async:false});
-		   var jqxhr = $.get("http://" + window.location.hostname + "/PDFLetter.php?action=letters",{ 'records': recordsToPrint},function(data,status)
+		   var jqxhr = $.get( "PDFLetter.php?action=letters",{ 'records': recordsToPrint, 'part': letterPart},function(data,status)
 					 {
-						link 	= "<a  href=\"" + data + "\"  target=\"_blank\"> <img id=\"myimg\" src=\"pdf.png\" height=\"" + imgDim + "\" width=\"" + imgDim + "\"></a>"
+						window.open( data , "_blank");
 				    	alert("File: " + data + "\n" + "has been downloaded with Status: " + status);
 				  	});	
 		   $("#pdfout").html(link);
@@ -277,7 +280,7 @@ if ($_POST['content'])
 	
 	echo "</div>";
 	
-	echo "<div id=\"print_div\"><button id=\"print_letters\" onclick=\"printFunction()\">Print Letters</button><span id=\"pdfout\"></span></div>";
+	echo "<div id=\"print_div\"><button id=\"print_letters\" onclick=\"printFunction(this)\">Print Letters</button><span id=\"pdfout\"></span></div>";
 } else {
 	echo "<h3>Please fill out all required fields.</h3>\n\n\n";
 }
