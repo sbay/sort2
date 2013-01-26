@@ -3,7 +3,7 @@
 if( $_REQUEST['action'] == 'letters' )
 {
 	$hostName		= $_SERVER[SERVER_NAME]; 
-	$dirBrows		=  "." . DIRECTORY_SEPARATOR . "tmp";	
+	$dirBrows		=  "tmp";	
 	
 	
 	if(  !$_REQUEST['records'] )
@@ -14,7 +14,7 @@ if( $_REQUEST['action'] == 'letters' )
 
 	$printRecords	= 	$_REQUEST['records'];
 	
-	
+	$fileName 	= $dirBrows . DIRECTORY_SEPARATOR .  "letter.pdf";
 	if(!file_exists($dirBrows))
 	{
 		mkdir($dirBrows);
@@ -22,8 +22,7 @@ if( $_REQUEST['action'] == 'letters' )
 	else
 	{
 		// remove previous file
-		$mask 	= $dirBrows . DIRECTORY_SEPARATOR . "letter.pdf";
-		array_map( "unlink", glob( $mask ) );
+		array_map( "unlink", glob( $fileName ) );
 	}
 	
 	
@@ -31,17 +30,14 @@ if( $_REQUEST['action'] == 'letters' )
 	require_once 'library/fpdf.php';
 	
 	$pdf = new FPDF();
-	
-	$fileName 	= $dirBrows . DIRECTORY_SEPARATOR .  "letter.pdf";
-	
-	
+		
 	$maxRecords	=	sizeof($printRecords);
 	for($i=0; $i < $maxRecords ; $i++)
 	{
 		$pdf->SetFont('Times', 'B', 15);
 		$pdf->AddPage();
 	
-		// envelop
+		// flier
 		$fullName 		= $printRecords[$i][0] . " " . $printRecords[$i][1] . " " . $printRecords[$i][2] . "\n";
 		$street 		= $printRecords[$i][3] . "\n";
 		$adress			= $printRecords[$i][4] .  " " . $printRecords[$i][5] . " " . $printRecords[$i][6] . "\n";
@@ -57,9 +53,8 @@ if( $_REQUEST['action'] == 'letters' )
 		$pdf->Image('img/flr_foot.jpg',0,135,0,135);
 		
 	}
-	$linkFileName	= "http:" . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . $hostName . DIRECTORY_SEPARATOR . $fileName;
 		
 	$pdf->Output( $fileName ,'F');
-	echo  $linkFileName;
+	echo  $fileName;
 }
 ?>
