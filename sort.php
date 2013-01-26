@@ -148,7 +148,8 @@ if ($_POST['content'])
 	
 		echo "<table id=\"table_two\" border=\"1\">";
 		echo "<thead>";
-		echo "<tr><th><b>First name</b></th>";
+		echo "<tr><th></th>";
+		echo "<th><b>First name</b></th>";
 		echo "<th><b>Middle name</b></th>";
 		echo "<th><b>Last name</b></th>";
 		echo "<th><b>Street adress</b></th>";
@@ -162,15 +163,16 @@ if ($_POST['content'])
 	
 		for ($i=0; $i<$record_plus_length; $i++)
 		{
-			echo "<tr><td>" . $record_plus[$i]['first_name'] . "</td>";
-					echo "<td>" . $record_plus[$i]['middle_name'] . "</td>";
-					echo "<td>" . $record_plus[$i]['last_name'] . "</td>";
-					echo "<td>" . $record_plus[$i]['street_address'] . "</td>";
-					echo "<td>" . $record_plus[$i]['city'] . "</td>";
-					echo "<td>" . $record_plus[$i]['state'] . "</td>";
-					echo "<td>" . $record_plus[$i]['zip'] . "</td>";
-					echo "<td>" . $record_plus[$i]['charges'] . "</td>";
-					echo "<td><input type=\"checkbox\" name=\"print_letter\" id=\"checkbox_print_srt" . $i . "\"/></td></tr>";
+			echo "<tr><td>" . ($i+1) . "</td>";
+			echo "<td>" . $record_plus[$i]['first_name'] . "</td>";
+			echo "<td>" . $record_plus[$i]['middle_name'] . "</td>";
+			echo "<td>" . $record_plus[$i]['last_name'] . "</td>";
+			echo "<td>" . $record_plus[$i]['street_address'] . "</td>";
+			echo "<td>" . $record_plus[$i]['city'] . "</td>";
+			echo "<td>" . $record_plus[$i]['state'] . "</td>";
+			echo "<td>" . $record_plus[$i]['zip'] . "</td>";
+			echo "<td>" . $record_plus[$i]['charges'] . "</td>";
+			echo "<td><input type=\"checkbox\" name=\"print_letter\" id=\"checkbox_print_srt" . $i . "\"/></td></tr>";
 		}
 		echo "</table>";
 	
@@ -186,7 +188,8 @@ if ($_POST['content'])
 	
 		echo "<table id=\"table_three\" border=\"1\">";
 		echo "<thead>";
-		echo "<tr><th><b>First name</b></th>";
+		echo "<tr><th></th>";
+		echo "<th><b>First name</b></th>";
 		echo "<th><b>Middle name</b></th>";
 		echo "<th><b>Last name</b></th>";
 		echo "<th><b>Street adress</b></th>";
@@ -204,7 +207,8 @@ if ($_POST['content'])
 	
 		for ($i=0; $i<$record_plus_length; $i++)
 		{
-			echo "<tr><td>" . $record_plus[$i]['first_name'] . "</td>";
+			echo "<tr><td>" . ($i+1) . "</td>";
+			echo "<td>" . $record_plus[$i]['first_name'] . "</td>";
 			echo "<td>" . $record_plus[$i]['middle_name'] . "</td>";
 			echo "<td>" . $record_plus[$i]['last_name'] . "</td>";		
 			echo "<td>" . $record_plus[$i]['street_address'] . "</td>";
@@ -231,7 +235,8 @@ if ($_POST['content'])
 	
 		echo "<table id=\"table_four\" border=\"1\">";
 		echo "<thead>";
-		echo "<tr><th><b>First name</b></th>";
+		echo "<tr><th></th>";
+		echo "<th><b>First name</b></th>";
 		echo "<th><b>Middle name</b></th>";
 		echo "<th><b>Last name</b></th>";	
 		echo "<th><b>Street adress</b></th>";
@@ -251,7 +256,8 @@ if ($_POST['content'])
 		{
 			if( !$a->isMatched( $record_plus[$i] ) )
 				continue;
-			echo "<tr><td>" . $record_plus[$i]['first_name'] . "</td>";
+			echo "<tr><td>" . ($i+1) . "</td>";
+			echo "<td>" . $record_plus[$i]['first_name'] . "</td>";
 			echo "<td>" . $record_plus[$i]['middle_name'] . "</td>";
 			echo "<td>" . $record_plus[$i]['last_name'] . "</td>";	
 			echo "<td>" . $record_plus[$i]['street_address'] . "</td>";
