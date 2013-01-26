@@ -26,7 +26,7 @@ define('OTHER_FULL_RESULT', 		0x2000000 ); // all records full info
 define('OTHER_SHORT_RESULT',		0x4000000 ); // all records short info
 define('OTHER_MATCHED_FULL_RESULT',	0x0000004 ); // matched records full info
 
-require_once 'VBitFlags.php';
+require_once 'library/BitFlags.php';
 
 class CrimeListFlag extends VBitFlags
 {
@@ -285,7 +285,7 @@ class CrimeListFlag extends VBitFlags
 	}
 }
 
-require_once 'VGeoGoogleYahoo.php';
+require_once 'library/GeoGoogleYahoo.php';
 
 class CrimeList extends CrimeListFlag
 {
@@ -316,7 +316,7 @@ class CrimeList extends CrimeListFlag
 	function sortingLAPD( $content )
 	{
 		
-		require_once 'VGeoGoogleYahoo.php';
+		require_once 'library/GeoGoogleYahoo.php';
 		// Break down the input data into an array and find out the total number of entries
 		$array_content 	= explode("\r\n", stripslashes(trim($content)));
 		$num_lines 		= sizeof($array_content);
@@ -372,7 +372,7 @@ class CrimeList extends CrimeListFlag
 	function sortingVCSD( $content )
 	{
 		
-		require_once 'VGeoGoogleYahoo.php';
+		require_once 'library/GeoGoogleYahoo.php';
 		
 		$dom = new DOMDocument();
 		$res = $dom->loadXML(stripslashes(trim( $content )));
@@ -450,7 +450,7 @@ class CrimeList extends CrimeListFlag
 
 	function sortingLASD( $content )
 	{
-		require_once 'VGeoGoogleYahoo.php';
+		require_once 'library/GeoGoogleYahoo.php';
 
 		// Break down the input data into an array and find out the total number of entries
 		$raw_content 	= stripslashes(trim( $content ));
@@ -558,7 +558,7 @@ class CrimeList extends CrimeListFlag
 
 	function sortingOCSD( $content ) 
 	{
-		require_once 'VGeoGoogleYahoo.php';
+		require_once 'library/GeoGoogleYahoo.php';
 		// Break down the input data into an array and find out the total number of entries
 		$array_content 	= explode("\r\n", stripslashes(trim($content)));
 		$num_lines 		= sizeof($array_content);

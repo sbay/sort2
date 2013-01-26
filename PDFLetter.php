@@ -28,7 +28,7 @@ if( $_REQUEST['action'] == 'letters' )
 	
 	
 	
-	require_once 'fpdf.php';
+	require_once 'library/fpdf.php';
 	
 	$pdf = new FPDF();
 	
