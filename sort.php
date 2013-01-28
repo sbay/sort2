@@ -26,25 +26,13 @@ function checkFunction(element)
 
 }
 
-function cleanDirectory()
-{
-	$.get("PDFLetter.php?action=letters",{ 'directory': true},function(data,status)
-			 {
-		    	alert("Clean completed with status:" + status);
-		  	});	
-
-}
-
 function printFunction(element)
 {
 		  var boxes 				= $('[id^=checkbox_print]:checked');	
 		  var recordsToPrint		= [];
-		  var links					= [];
 		 
 		  for( j=0; j< boxes.length ; j++)			 
 		  {
-			  	 var link 			= 	"";
-			  	
 				 var celChildren 	= 	$(boxes[j]).parent().parent("tr").find("td");
 				 var curText		=	[];
 
@@ -52,8 +40,7 @@ function printFunction(element)
 				 {
 					 curText[i-1] 	= 	$(celChildren[i]).text();
 				 }
-				 recordsToPrint[j]	=	curText;
-				 
+				 recordsToPrint[j]	=	curText; 
 			}
 
 		   jQuery.ajaxSetup({async:false});
@@ -118,11 +105,11 @@ if ($_POST['content'])
 		echo "</thead>";
 		
 		
-		for ($i=0; $i<$record_plus_length; $i++)
+		for ($i=0, $j=1; $i<$record_plus_length; $i++)
 		{
 		if( !$a->isMatched( $record_plus[$i] ) )
 			continue;
-			echo "<tr><td>" . ($i+1) . "</td>";
+			echo "<tr><td>" . $j++ . "</td>";
 			echo "<td>" . $record_plus[$i]['first_name'] . "</td>";
 			echo "<td>" . $record_plus[$i]['middle_name'] . "</td>";
 			echo "<td>" . $record_plus[$i]['last_name'] . "</td>";
@@ -252,11 +239,11 @@ if ($_POST['content'])
 		echo "</thead>";
 	
 	
-		for ($i=0; $i<$record_plus_length; $i++)
+		for ($i=0, $j=1; $i<$record_plus_length; $i++)
 		{
 			if( !$a->isMatched( $record_plus[$i] ) )
 				continue;
-			echo "<tr><td>" . ($i+1) . "</td>";
+			echo "<tr><td>" . $j++ . "</td>";
 			echo "<td>" . $record_plus[$i]['first_name'] . "</td>";
 			echo "<td>" . $record_plus[$i]['middle_name'] . "</td>";
 			echo "<td>" . $record_plus[$i]['last_name'] . "</td>";	
