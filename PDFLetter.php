@@ -34,23 +34,23 @@ if( $_REQUEST['action'] == 'letters' )
 	$maxRecords	=	sizeof($printRecords);
 	for($i=0; $i < $maxRecords ; $i++)
 	{
-		$pdf->SetFont('Times', 'B', 15);
+		$pdf->SetFont('Times', 'B', 12);
 		$pdf->AddPage();
 	
 		// flier
 		$fullName 		= $printRecords[$i][0] . " " . $printRecords[$i][1] . " " . $printRecords[$i][2] . "\n";
 		$street 		= $printRecords[$i][3] . "\n";
-		$adress			= $printRecords[$i][4] .  " " . $printRecords[$i][5] . " " . $printRecords[$i][6] . "\n";
-		$pdf->Image('img/flr_head.jpg',0,0,0, 90);
-		$pdf->SetXY(($pdf->GetX()+100),95);
+		$adress			= $printRecords[$i][4] .  ", " . $printRecords[$i][5] . " " . $printRecords[$i][6] . "\n";
+		$pdf->Image('img/flr_head.jpg',0,0, -200);
+		$pdf->SetXY(($pdf->GetX()+120),95);
 		$pdf->Cell(0,0,$fullName);
-		$pdf->Ln(10);
-		$pdf->SetX(($pdf->GetX()+100));
+		$pdf->Ln(5);
+		$pdf->SetX(($pdf->GetX()+120));
 		$pdf->Cell(0,0,$street);
-		$pdf->Ln(10);
-		$pdf->SetX(($pdf->GetX()+100));
+		$pdf->Ln(5);
+		$pdf->SetX(($pdf->GetX()+120));
 		$pdf->Cell(0,0,$adress);
-		$pdf->Image('img/flr_foot.jpg',0,135,0,135);
+		$pdf->Image('img/flr_foot.jpg',0,150, -200);
 		
 	}
 		

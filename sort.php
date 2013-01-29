@@ -46,7 +46,7 @@ function printFunction(element)
 		   jQuery.ajaxSetup({async:false});
 		   var jqxhr = $.get( "PDFLetter.php?action=letters",{ 'records': recordsToPrint},function(data,status)
 					 {
-			   			alert("File: " + data + "\n" + "has been downloaded with Status: " + status);
+			   			//alert("File: " + data + "\n" + "has been downloaded with Status: " + status);
 						window.open( data , "_blank");	
 				  	});	
 		   jQuery.ajaxSetup({async:true});
