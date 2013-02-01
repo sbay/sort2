@@ -26,32 +26,44 @@ function checkFunction(element)
 
 }
 
-function printFunction(element)
-{
-		  var boxes 				= $('[id^=checkbox_print]:checked');	
-		  var recordsToPrint		= [];
-		 
-		  for( j=0; j< boxes.length ; j++)			 
-		  {
-				 var celChildren 	= 	$(boxes[j]).parent().parent("tr").find("td");
-				 var curText		=	[];
-
-				 for( i=1; i< celChildren.length ; i++)
-				 {
-					 curText[i-1] 	= 	$(celChildren[i]).text();
-				 }
-				 recordsToPrint[j]	=	curText; 
-			}
-
-		   jQuery.ajaxSetup({async:false});
-		   var jqxhr = $.get( "PDFLetter.php?action=letters",{ 'records': recordsToPrint},function(data,status)
-					 {
-			   			//alert("File: " + data + "\n" + "has been downloaded with Status: " + status);
-						window.open( data , "_blank");	
-				  	});	
-		   jQuery.ajaxSetup({async:true});
-		    
+function printFunction(element) {
+	var boxes = $('[id^=checkbox_print]:checked'),
+	recordsToPrint = [];
+	
+	for( j=0; j< boxes.length ; j++) {
+		var celChildren = $(boxes[j]).parent().parent("tr").find("td"),
+		curText = [];
+		
+		for( i=1; i< celChildren.length ; i++) {
+			curText[i-1] = $(celChildren[i]).text();
+		}
+	
+		recordsToPrint[j]	=	curText; 
+	}
+	
+	jQuery.ajaxSetup({async:false});
+	var jqxhr = $.get( "PDFLetter.php?action=letters",{ 'records': recordsToPrint},function(data,status) {
+		//alert("File: " + data + "\n" + "has been downloaded with Status: " + status);
+		window.open( data , "_blank");	
+	});
+	jQuery.ajaxSetup({async:true});
 }
+</script>
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-15774695-10']);
+  _gaq.push(['_setDomainName', 'theamericancourier.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
 </script>
 </head>
 <body>
