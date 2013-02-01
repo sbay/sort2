@@ -110,13 +110,13 @@ if ($_POST['content'])
 		if( !$a->isMatched( $record_plus[$i] ) )
 			continue;
 			echo "<tr><td>" . $j++ . "</td>";
-			echo "<td>" . $record_plus[$i]['first_name'] . "</td>";
-			echo "<td>" . $record_plus[$i]['middle_name'] . "</td>";
-			echo "<td>" . $record_plus[$i]['last_name'] . "</td>";
-			echo "<td>" . $record_plus[$i]['street_address'] . "</td>";
-			echo "<td>" . $record_plus[$i]['city'] . "</td>";
-			echo "<td>" . $record_plus[$i]['state'] . "</td>";
-			echo "<td>" . $record_plus[$i]['zip'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['first_name'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['middle_name'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['last_name'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['street_address'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['city'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['state'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['zip'] . "</td>";
 			echo "<td>" . $record_plus[$i]['charges'] . "</td>";
 			echo "<td><input type=\"checkbox\" name=\"print_letter\" id=\"checkbox_print" . $i . "\"/></td></tr>";			
 		}
@@ -151,13 +151,13 @@ if ($_POST['content'])
 		for ($i=0; $i<$record_plus_length; $i++)
 		{
 			echo "<tr><td>" . ($i+1) . "</td>";
-			echo "<td>" . $record_plus[$i]['first_name'] . "</td>";
-			echo "<td>" . $record_plus[$i]['middle_name'] . "</td>";
-			echo "<td>" . $record_plus[$i]['last_name'] . "</td>";
-			echo "<td>" . $record_plus[$i]['street_address'] . "</td>";
-			echo "<td>" . $record_plus[$i]['city'] . "</td>";
-			echo "<td>" . $record_plus[$i]['state'] . "</td>";
-			echo "<td>" . $record_plus[$i]['zip'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['first_name'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['middle_name'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['last_name'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['street_address'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['city'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['state'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['zip'] . "</td>";
 			echo "<td>" . $record_plus[$i]['charges'] . "</td>";
 			echo "<td><input type=\"checkbox\" name=\"print_letter\" id=\"checkbox_print_srt" . $i . "\"/></td></tr>";
 		}
@@ -195,13 +195,13 @@ if ($_POST['content'])
 		for ($i=0; $i<$record_plus_length; $i++)
 		{
 			echo "<tr><td>" . ($i+1) . "</td>";
-			echo "<td>" . $record_plus[$i]['first_name'] . "</td>";
-			echo "<td>" . $record_plus[$i]['middle_name'] . "</td>";
-			echo "<td>" . $record_plus[$i]['last_name'] . "</td>";		
-			echo "<td>" . $record_plus[$i]['street_address'] . "</td>";
-			echo "<td>" . $record_plus[$i]['city'] . "</td>";
-			echo "<td>" . $record_plus[$i]['state'] . "</td>";
-			echo "<td>" . $record_plus[$i]['zip'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['first_name'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['middle_name'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['last_name'] . "</td>";		
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['street_address'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['city'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['state'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['zip'] . "</td>";
 			echo "<td>" . $record_plus[$i]['charges'] . "</td>";
 			echo "<td>" . $record_plus[$i]['gender'] . "</td>";
 			echo "<td>" . $record_plus[$i]['race'] . "</td>";
@@ -244,13 +244,13 @@ if ($_POST['content'])
 			if( !$a->isMatched( $record_plus[$i] ) )
 				continue;
 			echo "<tr><td>" . $j++ . "</td>";
-			echo "<td>" . $record_plus[$i]['first_name'] . "</td>";
-			echo "<td>" . $record_plus[$i]['middle_name'] . "</td>";
-			echo "<td>" . $record_plus[$i]['last_name'] . "</td>";	
-			echo "<td>" . $record_plus[$i]['street_address'] . "</td>";
-			echo "<td>" . $record_plus[$i]['city'] . "</td>";
-			echo "<td>" . $record_plus[$i]['state'] . "</td>";
-			echo "<td>" . $record_plus[$i]['zip'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['first_name'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['middle_name'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['last_name'] . "</td>";	
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['street_address'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['city'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['state'] . "</td>";
+			echo "<td contenteditable=\"true\">" . $record_plus[$i]['zip'] . "</td>";
 			echo "<td>" . $record_plus[$i]['charges'] . "</td>";
 			echo "<td>" . $record_plus[$i]['gender'] . "</td>";
 			echo "<td>" . $record_plus[$i]['race'] . "</td>";
