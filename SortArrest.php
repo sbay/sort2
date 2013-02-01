@@ -342,9 +342,9 @@ class CrimeList extends CrimeListFlag
 			else
 				$record_plus['matched']			|= parent::record_matched_crime;
 										
-			$record_plus['street_address'] 	= ucwords(preg_replace('/\s+/',' ', trim(substr($array_content[$i], 249, 30))));
-			$record_plus['city'] 			= ucwords(trim(substr($array_content[$i], 279, 16)));
-			$record_plus['state'] 			= ucwords(trim(substr($array_content[$i], 295, 2)));				
+			$record_plus['street_address']          = strtoupper(preg_replace('/\s+/',' ', trim(substr($array_content[$i], 249, 30))));
+			$record_plus['city'] 			= strtoupper(trim(substr($array_content[$i], 279, 16)));
+			$record_plus['state'] 			= strtoupper(trim(substr($array_content[$i], 295, 2)));				
 			$record_plus['zip'] 			= $this->VGeoZIP->getZIP( str_replace(" ", "+", preg_replace('/\s+/',' ', trim(substr($array_content[$i], 249, 24))) . "+" .  $record_plus['city'] . "+" .  $record_plus['state']   )   ) ;			
 			
 			// check ZIP code match
@@ -355,15 +355,15 @@ class CrimeList extends CrimeListFlag
 			else
 				$record_plus['matched']			|= parent::record_matched_zip;
 			
-			$record_plus['first_name']		= ucwords(trim(substr($array_content[$i], 104, 12)));
-			$record_plus['last_name'] 		= ucwords(trim(substr($array_content[$i], 89, 15)));
-			$record_plus['middle_name'] 	= ucwords(trim(substr($array_content[$i], 116, 13)));
+			$record_plus['first_name']		= strtoupper(trim(substr($array_content[$i], 104, 12)));
+			$record_plus['last_name'] 		= strtoupper(trim(substr($array_content[$i], 89, 15)));
+			$record_plus['middle_name']             = strtoupper(trim(substr($array_content[$i], 116, 13)));
 			$record_plus['gender'] 			= trim(substr($array_content[$i], 169, 1));
 			$record_plus['race'] 			= trim(substr($array_content[$i], 171, 1));
-			$record_plus['arrest_agency'] 	= "LAPD";
-			$record_plus['arrest_date'] 	= trim(substr($array_content[$i], 969, 16));
+			$record_plus['arrest_agency']           = "LAPD";
+			$record_plus['arrest_date']             = trim(substr($array_content[$i], 969, 16));
 
-			$this->full_matched_records[$j++]= $record_plus;			
+			$this->full_matched_records[$j++]       = $record_plus;			
 		}
 	}
 	
@@ -411,12 +411,12 @@ class CrimeList extends CrimeListFlag
 				 
 					
 				// Critical Info
-				$record_plus['first_name'] 		= ucwords($full_name[0]);
-				$record_plus['last_name'] 		= ucwords($full_name[2]);
-				$record_plus['middle_name'] 	= ucwords($full_name[1]);
-				$record_plus['street_address'] 	= ucwords($booking->getElementsByTagName('STREET')->item(0)->nodeValue);
-				$record_plus['city'] 			= ucwords($booking->getElementsByTagName('CITY')->item(0)->nodeValue);
-				$record_plus['state'] 			= ucwords($booking->getElementsByTagName('ST')->item(0)->nodeValue);
+				$record_plus['first_name'] 		= strtoupper($full_name[0]);
+				$record_plus['last_name'] 		= strtoupper($full_name[2]);
+				$record_plus['middle_name']             = strtoupper($full_name[1]);
+				$record_plus['street_address']          = strtoupper($booking->getElementsByTagName('STREET')->item(0)->nodeValue);
+				$record_plus['city'] 			= strtoupper($booking->getElementsByTagName('CITY')->item(0)->nodeValue);
+				$record_plus['state'] 			= strtoupper($booking->getElementsByTagName('ST')->item(0)->nodeValue);
 					
 				if (!$booking->getElementsByTagName('ZIP')->item(0)->nodeValue) 
 				{
@@ -438,10 +438,10 @@ class CrimeList extends CrimeListFlag
 				
 				$record_plus['gender'] 			= $booking->getElementsByTagName('GENDER')->item(0)->nodeValue;
 				$record_plus['race'] 			= $booking->getElementsByTagName('RACE')->item(0)->nodeValue;
-				$record_plus['arrest_agency'] 	= $booking->getElementsByTagName('AGENCY')->item(0)->nodeValue;
-				$record_plus['arrest_date'] 	= $booking->getElementsByTagName('REC_DT')->item(0)->nodeValue . ' ' . $booking->getElementsByTagName('REC_TIME')->item(0)->nodeValue;
+				$record_plus['arrest_agency']           = $booking->getElementsByTagName('AGENCY')->item(0)->nodeValue;
+				$record_plus['arrest_date']             = $booking->getElementsByTagName('REC_DT')->item(0)->nodeValue . ' ' . $booking->getElementsByTagName('REC_TIME')->item(0)->nodeValue;
 	
-				$this->full_matched_records[$j++]= $record_plus;
+				$this->full_matched_records[$j++]       = $record_plus;
 
 			}
 		}
@@ -469,12 +469,12 @@ class CrimeList extends CrimeListFlag
 		// Start filtering
 		for ($i=0, $k=0; $i<$num_lines; $i++) 
 		{
-			$array_content[$i] 				= ucwords(stripslashes(trim($array_content[$i])));
+			$array_content[$i] 			=  stripslashes(trim($array_content[$i]));
 	
 			// Break down the input data into an array and find out the total number of entries
 			$array_content_inner 			= explode("\r\n", $array_content[$i]);
 			
-			$record_plus 					= null;
+			$record_plus 				= null;
 			$record_plus['matched']			= parent::record_not_matched;
 			
 			
@@ -484,20 +484,20 @@ class CrimeList extends CrimeListFlag
 				// Critical Info
 				if (strpos($array_content_inner[$j], "Inmate Name")) 
 				{
-					$record_plus['first_name'] 			= trim(substr($array_content_inner[$j], 44, 13));
-					$record_plus['last_name'] 			= trim(substr($array_content_inner[$j], 27, 15));
-					$record_plus['middle_name'] 		= trim(substr($array_content_inner[$j], 57, 9));
+					$record_plus['first_name'] 		= strtoupper(trim(substr($array_content_inner[$j], 44, 13)));
+					$record_plus['last_name'] 		= strtoupper(trim(substr($array_content_inner[$j], 27, 15)));
+					$record_plus['middle_name'] 		= strtoupper(trim(substr($array_content_inner[$j], 57, 9)));
 				} 
 				elseif (strpos($array_content_inner[$j], "Home Address")) 
 				{
 					$do 								= preg_match("/<b>(.*)<\/b>/", $array_content_inner[$j], $raw_address);
 					$raw_address_array 					= explode(", ", $raw_address[1]);
 	
-					$record_plus['city'] 				= trim($raw_address_array[count($raw_address_array)-2]);
-					$record_plus['state'] 				= trim(substr($raw_address_array[count($raw_address_array)-1], 0, 2));
-					$record_plus['street_address'] 		= trim(substr($raw_address[1], 0, strpos($raw_address[1], $record_plus['city'])-2));
+					$record_plus['city'] 			= strtoupper(trim($raw_address_array[count($raw_address_array)-2]));
+					$record_plus['state'] 			= strtoupper(trim(substr($raw_address_array[count($raw_address_array)-1], 0, 2)));
+					$record_plus['street_address'] 		= strtoupper(trim(substr($raw_address[1], 0, strpos($raw_address[1], $record_plus['city'])-2)));
 	
-					$record_plus['zip'] 				= trim(substr($raw_address[1], -5));
+					$record_plus['zip'] 			= trim(substr($raw_address[1], -5));
 	
 					if ( $record_plus['zip'] == "00000" || $record_plus['zip'] == "") 
 					{
@@ -511,14 +511,14 @@ class CrimeList extends CrimeListFlag
 						if( $this->isMatchAnyFlagSet() &&  !($this->isAllRecordsAnyFlagSet()) )continue 2;
 					}
 					else
-						$record_plus['matched']			|= parent::record_matched_zip;
+						$record_plus['matched']		|= parent::record_matched_zip;
 	
 				} 
 				elseif (strpos($array_content_inner[$j], "Arrest Charge")) 
 				{
-					$do 								= preg_match("/<b>(.*)<\/b>/", $array_content_inner[$j], $raw_charges);
-					$record_plus['charges'] 			= trim($raw_charges[1]);
-					$record_plus['crime']				= $this->isCrimeInCrimeList( $record_plus['charges'] ) ;
+					$do 					= preg_match("/<b>(.*)<\/b>/", $array_content_inner[$j], $raw_charges);
+					$record_plus['charges'] 		= trim($raw_charges[1]);
+					$record_plus['crime']			= $this->isCrimeInCrimeList( $record_plus['charges'] ) ;
 					
 					// check CRIME list match
 					if( $record_plus['crime'] == "" )
@@ -526,14 +526,14 @@ class CrimeList extends CrimeListFlag
 						if( $this->isMatchAnyFlagSet()  &&  !($this->isAllRecordsAnyFlagSet()) )continue 2;
 					}
 					else
-						$record_plus['matched']			|= parent::record_matched_crime;
+						$record_plus['matched']		|= parent::record_matched_crime;
 						
 
 				} 
 				elseif (strpos($array_content_inner[$j], "Sex")) 
 				{
-					$do 								= preg_match("/<b>(.*)<\/b>/", $array_content_inner[$j], $raw_gender);
-					$record_plus['gender'] 				= trim($raw_gender[1]);
+					$do 					= preg_match("/<b>(.*)<\/b>/", $array_content_inner[$j], $raw_gender);
+					$record_plus['gender'] 			= trim($raw_gender[1]);
 				} 
 				elseif (strpos($array_content_inner[$j], "Race")) 
 				{
@@ -570,11 +570,11 @@ class CrimeList extends CrimeListFlag
 			//$array_content[$i] = ucwords($array_content[$i]);
 			$record_content = explode(",", $array_content[$i]);
 	
-			$record_plus 					= null;
+			$record_plus 				= null;
 			$record_plus['matched']			= parent::record_not_matched;
 				
 			$record_plus['charges'] 		= $record_content[13];
-			$record_plus['charges_desc'] 	= $record_content[14];
+			$record_plus['charges_desc']            = $record_content[14];
 			$record_plus['crime']			= $this->isCrimeInCrimeList( $record_plus['charges'] ) ;
 			
 			// check crime code match
@@ -583,16 +583,16 @@ class CrimeList extends CrimeListFlag
 				if( $this->isMatchAnyFlagSet()  &&  !($this->isAllRecordsAnyFlagSet()) )continue;
 			}
 			else
-				$record_plus['matched']			|= parent::record_matched_crime;
+				$record_plus['matched']		|= parent::record_matched_crime;
 			
-			$record_plus['street_address'] 	= $record_content[4];
-			$record_plus['city'] 			= $record_content[5];
-			$record_plus['state'] 			= $record_content[6];
+			$record_plus['street_address']          = strtoupper($record_content[4]);
+			$record_plus['city'] 			= strtoupper($record_content[5]);
+			$record_plus['state'] 			= strtoupper($record_content[6]);
 			$record_plus['zip'] 			= $record_content[7];
 	
 			if(empty($record_plus['zip']) || ctype_space($record_plus['zip'])) 
 			{
-				$record_zip_string 			= str_replace(" ", "+", $record_plus['street_address'] . "+" . $record_plus['city'] . "+" . $record_plus['state']);
+				$record_zip_string 		= str_replace(" ", "+", $record_plus['street_address'] . "+" . $record_plus['city'] . "+" . $record_plus['state']);
 				$record_plus['zip'] 		= $this->VGeoZIP->getZIP( $record_zip_string );
 			}
 			
@@ -602,16 +602,16 @@ class CrimeList extends CrimeListFlag
 				if( $this->isMatchAnyFlagSet() &&  !($this->isAllRecordsAnyFlagSet()) )continue;
 			}
 			else
-				$record_plus['matched']			|= parent::record_matched_zip;
+				$record_plus['matched']		|= parent::record_matched_zip;
 			
-			$record_plus['first_name'] 		= $record_content[2];
-			$record_plus['last_name'] 		= $record_content[1];
-			$record_plus['middle_name'] 	= $record_content[3];
+			$record_plus['first_name'] 		= strtoupper($record_content[2]);
+			$record_plus['last_name'] 		= strtoupper($record_content[1]);
+			$record_plus['middle_name']             = strtoupper($record_content[3]);
 			
 			$record_plus['gender'] 			= $record_content[9];
 			$record_plus['race'] 			= $record_content[8];
-			$record_plus['arrest_agency'] 	= $record_content[11];
-			$record_plus['arrest_date'] 	= $record_content[12];
+			$record_plus['arrest_agency']           = $record_content[11];
+			$record_plus['arrest_date']             = $record_content[12];
 	
 			$this->full_matched_records[$k++]= $record_plus;
 		}
